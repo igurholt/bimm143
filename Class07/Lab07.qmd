@@ -1,0 +1,269 @@
+---
+title: "Class 7: Machine Learning"
+author: "Ian Gurholt (PID: A16767484)"
+format: pdf
+---
+
+Today we are going to learn how to apply different machine learning methods, beginning with clustering:
+
+The goal here is to find groups/clusters in your input data.
+
+First I will make up some data with clear groups.For this I will use the 'rnorm()'function.
+```{r}
+rnorm(10)
+```
+```{r}
+hist(rnorm(10000, mean=3))
+```
+
+```{r}
+x<-(c(rnorm(10000, -3), rnorm(10000,3)))
+hist(x)
+```
+
+```{r}
+n<-30
+x<-(c(rnorm(n, -3), rnorm(n,3)))
+y <- rev(x)
+
+z<-cbind(x,y)
+head(z)
+```
+
+```{r}
+plot(z)
+```
+
+Use the kmeans() function setting k to 2 and nstart=20
+
+Inspect/print the results
+
+Q. How many points are in each cluster?
+Q. What ‘component’ of your result object details
+ - cluster size?
+ - cluster assignment/membership?
+ - cluster center?
+ 
+Plot x colored by the kmeans cluster assignment and
+ add cluster centers as blue points
+
+```{r}
+km<-kmeans(z, centers=2)
+km
+```
+
+Results in kmeansobject 'km'
+```{r}
+attributes(km)
+```
+
+Cluster Size?
+```{r}
+km$size
+```
+
+cluster assignment/membership?
+```{r}
+km$cluster
+```
+
+Cluster center?
+```{r}
+km$centers
+```
+
+> Q. Plot x colored by the kmeans cluster assignment and
+ add cluster centers as blue points
+ 
+```{r}
+plot(z)
+```
+ R will recycle the shorter color vector to be the same length as the longer (number of data points) in z
+```{r}
+plot(z, col=c("red", "blue"))
+```
+
+```{r}
+plot(z, col= 2)
+```
+```{r}
+plot(z, col=km$cluster)
+```
+We can use the 'points()' function to add new points to an existing plot...like the cluster centers
+
+```{r}
+plot(z, col=km$cluster)
+points(km$centers, col= "blue", pch=15, cex=3)
+```
+
+> Q. Can you run kmeans and ask for 4 clusters please and plot the results like we have done above
+
+```{r}
+km4<-kmeans(z, centers=4)
+km4
+```
+```{r}
+plot(z, col=km4$cluster)
+points(km4$centers, col= "blue", pch=15, cex=3)
+```
+
+## Heiarchical Clustering
+
+Lets take our same made up data 'z' and see how hclust works
+
+First we need a distance matrix of our data to be clustered.
+```{r}
+d<- dist(z)
+hc<- hclust(d)
+hc
+```
+```{r}
+plot(hc)
+abline(h=8, col="red")
+```
+I can get my cluster membership vector by "cutting the tree" with the `cutree()` function like so:
+
+```{r}
+grps<- cutree(hc,h=8)
+grps
+```
+Can you plot `z` colored by our hclust results:
+
+```{r}
+plot(z, col=grps)
+```
+
+## PCA of UK Food Data
+
+Read data from UK dept of food consumption in different parts of the UK
+```{r}
+url <- "https://tinyurl.com/UK-foods"
+x <- read.csv(url)
+head(x)
+```
+>Q1. How many rows and columns are in your new data frame named x? What R functions could you use to answer this questions?
+
+Can use the `dim()` function in order to specify dimensions of a data frame
+
+```{r}
+dim(x)
+```
+There are a total 17 rows and 5 columns in the original data frame
+
+```{r}
+url <- "https://tinyurl.com/UK-foods"
+x <- read.csv(url, row.name=1)
+head(x)
+```
+
+
+> Q2. Which approach to solving the ‘row-names problem’ mentioned above do you prefer and why? Is one approach more robust than another under certain circumstances?
+
+I prefer to use the second method where we specified `row.names=1` meaning that we want to first column to be the names of the food and not the row numbers. This is a much quicker and efficient way as it is all condensed in a single function, however this may not be as robust as the first method as it only rids of numbered rows and if we wanted to get rid of the entire first column, given it was not just solely row numbers, we would then have to use the first method as it can remove the whole column and any content within it over and over again. 
+
+
+Maybe bar plots show some trends?
+
+```{r}
+barplot(as.matrix(x), beside=T, col=rainbow(nrow(x)))
+```
+
+> Q3: Changing what optional argument in the above barplot() function results in the following plot?
+
+Adjusting the `beside` function in the code from T to F will consequently make a vertically stacked bar plot instead of plots aligned next to each other
+
+```{r}
+barplot(as.matrix(x), beside=F, col=rainbow(nrow(x)))
+```
+No obvious trend with the barplot...
+
+
+A so called Pairs Plot can be useful for small datasets like this one
+```{r}
+pairs(x, col=rainbow(10), pch=16)
+```
+
+> Q5: Generating all pairwise plots may help somewhat. Can you make sense of the following code and resulting figure? What does it mean if a given point lies on the diagonal for a given plot?
+
+The code produces a pair plot by which in this case compares two countries and a given food variable to assess any differences between the two countries, if the points fall along the diagonal than one can assume that there are few differences between the two locations and similarities exist, however if the points fall above or below this diagonal, than differences do exist however the way these plots are represented makes it challenging to precisely understand the extent of these differences as many point lie very close to this diagonal and it is unclear whether one plot is more representative than the other. 
+
+> Q6. What is the main differences between N. Ireland and the other countries of the UK in terms of this data-set?
+
+Its hard to see structure and trends in even this small dataset. Many points appear to lie on the diagonal and some are just slightly off, however the extent of this variation is unclear. How will we ever do this when we have big datasets with 1000s of things we are measuring...
+
+### PCA to the rescue
+
+Let's see how PCA deals with this data set. So main function in base R to do PCA is called `prcomp()`
+
+```{r}
+pca<- prcomp(t(x))
+summary(pca)
+```
+
+Let's see what is inside this `pca` object that we created from running `prcomp()`
+
+```{r}
+attributes(pca)
+```
+
+```{r}
+pca$x
+```
+
+> Q7. Complete the code below to generate a plot of PC1 vs PC2. The second line adds text labels over the data points.
+
+```{r}
+plot(pca$x[,1],pca$x[,2], col=c("black", "red", "blue","darkgreen"),pch=16, xlab="PC1 (67.4%)", ylab="PC2 (29%)")
+text(pca$x[,1], pca$x[,2], colnames(x))
+```
+
+> Q8. Customize your plot so that the colors of the country names match the colors in our UK and Ireland map and table at start of this document.
+
+```{r}
+plot(pca$x[,1],pca$x[,2] ,pch=16, xlab="PC1 (67.4%)", ylab="PC2 (29%)", xlim=c(-270, 500))
+text(pca$x[,1], pca$x[,2], colnames(x), col=c("orange", "red", "blue","darkgreen"))
+```
+
+```{r}
+v <- round( pca$sdev^2/sum(pca$sdev^2) * 100 )
+v
+```
+
+```{r}
+z <- summary(pca)
+z$importance
+```
+
+```{r}
+barplot(v, xlab="Principal Component", ylab="Percent Variation")
+```
+
+
+##PCA Loading Scores
+
+```{r}
+par(mar=c(10, 3, 0.35, 0))
+barplot( pca$rotation[,1], las=2 )
+```
+> Q9: Generate a similar ‘loadings plot’ for PC2. What two food groups feature prominantely and what does PC2 maninly tell us about?
+
+```{r}
+par(mar=c(10, 3, 0.35, 0))
+barplot( pca$rotation[,2], las=2 )
+```
+The two food groups that feature primarily in this graph is fresh potatoes and soft drinks and overall PC2 shows us a cleaner version of PC1 in which we can better decipher the skew of North Ireland to the right of the PCA being a result of soft drinks and the the skewing of the other countries to the left of the PCA being a result of the fresh potatoes negative value.
+
+##PCA of RNA Seq Data
+
+```{r}
+url2 <- "https://tinyurl.com/expression-CSV"
+rna.data <- read.csv(url2, row.names=1)
+head(rna.data)
+```
+
+> Q10: How many genes and samples are in this data set?
+
+```{r}
+dim(rna.data)
+```
+Given that genes are rows and samples are colunms, the `dim()` function shows that there are 100 genes and 10 samples
