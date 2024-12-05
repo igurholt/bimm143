@@ -1,7 +1,7 @@
 ---
 title: "Class 5: Data Viz with ggplot"
 author: "Ian Gurholt (PID A16767484)"
-format: pdf
+format: gfm
 editor: visual
 ---
 
