@@ -1,7 +1,7 @@
 ---
 title: "Class 8: Unsupervised Mini Project"
 author: "Ian Gurholt (PID:A16767484)"
-format: pdf
+format: gfm
 ---
 
 It is important to consider scaling your dataset
