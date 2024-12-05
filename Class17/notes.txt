@@ -1,0 +1,20 @@
+My notes for class 17
+
+pwd: print working directory
+
+
+ssh: open secure shell on another computer (login)
+# ssh[-i keyfile] username@computername
+gunzip: unzip
+tar -xvf: to untar
+cd: change directory
+
+The PATH is a special environment variable that stores the location of exe files in unix systems.
+I can print it with `echo $PATH`
+
+scp: secure copy from or to my machine
+#scp -i keyfile username@remotecomputer: FILE2COPY NEWlocalFILE
+
+ssh -i "~/Downloads/BIMM143_igurholt.pem" ubuntu@ec2-34-222-45-226.us-west-2.compute.amazonaws.com
+
+scp -i "~/Downloads/BIMM143_igurholt.pem" ubuntu@ec2-34-222-45-226.us-west-2.compute.amazonaws.com:~/*_quant .
