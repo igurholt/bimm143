@@ -1,0 +1,28 @@
+This is a simple text editor called nano. 
+
+Some key unix cmds so far
+
+pwd: print working directory
+cd: change directory
+ls: list out files
+mkdir: make a new directory/folder
+nano: a basic text editor
+
+ssh -i "~/Downloads/BIMM143_igurholt.pem" ubuntu@ec2-54-189-167-67.us-west-2.compute.amazonaws.com
+
+> Q1. What does the star character accomplish here?
+
+The star character represents all the files that are an extension of tha faa.gz directory.
+
+> Q2. How many sequences are in this mouse.1.protein.faa file? 
+
+There are a total of 57,119 sequences in this file
+
+> Q3. What happens if you run the above command without the > mm-first.fa part?
+
+It only heads the first four sequences of the mouse.1.protein.faa file
+
+> Q4. What happens if you were to use two ‘>’ symbols (i.e. >> mm-first.fa)?
+
+....
+
