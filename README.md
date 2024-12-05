@@ -7,7 +7,7 @@ Classwork for [BIMM143](https://bioboot.github.io/bimm143_F24/) F24 at UC San Di
 
 - Class 7: [Introduction to machine learning for bioinformatics](https://github.com/igurholt/bimm143/blob/main/Class07/Lab07.md)
 
-- Class 8: [Unsupervised learning mini-project]()
+- Class 8: [Unsupervised learning mini-project](https://github.com/igurholt/bimm143/blob/main/Class08/Class08.md)
 
 - Class 9: [Structural Bioinformatics]()
 
