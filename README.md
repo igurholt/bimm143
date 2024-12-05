@@ -3,7 +3,7 @@ Classwork for [BIMM143](https://bioboot.github.io/bimm143_F24/) F24 at UC San Di
 
 - Class 5: [Basic Data Exploration and Data visualization with ggplot](https://github.com/igurholt/bimm143/blob/main/class05/class05.md)
   
-- Class 6: [Why, when and how of writing your own R functions](https://github.com/igurholt/bimm143/blob/main/class06/Lab6_HW.pdf)
+- Class 6: [Why, when and how of writing your own R functions](https://github.com/igurholt/bimm143/blob/main/class06/class06.md)
 
 - Class 7: [Introduction to machine learning for bioinformatics](https://github.com/igurholt/bimm143/blob/main/Class07/Lab07.pdf)
 
