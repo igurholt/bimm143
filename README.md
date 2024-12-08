@@ -25,4 +25,4 @@ Classwork for [BIMM143](https://bioboot.github.io/bimm143_F24/) F24 at UC San Di
 
 - Class 16: [Essential UNIX for bioinformatics]()
 
-- Class 17: [Downstream Analysis of SRA Datasets](https://github.com/igurholt/bimm143/blob/main/Class17/lab17.pdf)
+- Class 17: [Downstream Analysis of SRA Datasets](https://github.com/igurholt/bimm143/blob/main/Class17/lab17.md)
