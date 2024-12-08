@@ -1,7 +1,7 @@
 ---
 title: "Lab 17: Downstream Analysis of SRA Dataset"
 author: "Ian Gurholt (PID: A16767484)"
-format: pdf
+format: gfm
 ---
 
 ##Importing Kalisto Results
