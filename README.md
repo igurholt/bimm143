@@ -11,7 +11,7 @@ Classwork for [BIMM143](https://bioboot.github.io/bimm143_F24/) F24 at UC San Di
 
 - Class 9: [Structural Bioinformatics](https://github.com/igurholt/bimm143/blob/main/Class09_mini_project/Class09_structural_bioinformatics.md)
 
-- Class 10: [Halloween Candy Mini-Project]()
+- Class 10: [Halloween Candy Mini-Project](https://github.com/igurholt/bimm143/blob/main/Class10_Halloween_Mini_Project/Class10_Halloween_Mini_Project.md)
 
 - Class 11: [Structural Bioinformatics (pt2 AlphaFold)]()
 
